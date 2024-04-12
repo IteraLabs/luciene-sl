@@ -36,6 +36,7 @@ fn main() -> Result<(), NvmlError> {
     let pcie_link_width = device.current_pcie_link_width()?;
     let pcie_max_link_gen = device.max_pcie_link_gen()?;
 
+    // General Device
     println!("\nGeneral Device Information: \n
              Device Name: {name}
              Device UUID: {uuid}
@@ -48,12 +49,14 @@ fn main() -> Result<(), NvmlError> {
              cuda_cores = cuda_cores,
              memory_info = mem_info);
 
+    // Operational State
     println!("\nOperational State Information: \n
              Temperature: {temperature}
              Power Usage: {power_usage}",
              temperature = temperature, 
              power_usage = power_usage);
 
+    // Hardware: Data transfer resources
     println!("\nHardware Context: Data Transfer: \n
              PCIe Link Generation : {pcie_link_gen}
              PCIe Link Speed: {pcie_link_speed}
@@ -64,6 +67,7 @@ fn main() -> Result<(), NvmlError> {
              pcie_link_width = pcie_link_width, 
              pcie_max_link_gen = pcie_max_link_gen);
 
+    // Software version
     println!("\nSystem CUDA version: {}.{}",
         cuda_driver_version_major(cuda_version),
         cuda_driver_version_minor(cuda_version)
