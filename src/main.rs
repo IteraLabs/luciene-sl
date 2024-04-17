@@ -13,7 +13,7 @@ fn main() -> Result<(), NvmlError> {
     
     // Get the version of the cuda driver
     let cuda_version = nvml.sys_cuda_driver_version()?;
-
+    
     // Index the first detected device
     let device = nvml.device_by_index(0)?;
     
