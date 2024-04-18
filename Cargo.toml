@@ -3,7 +3,7 @@ name = "lucien"
 version = "0.0.1"
 edition = "2021"
 description = "A loggin agent to work with LLM in Lucid Mode"
-license = "Apache License 2.0"
+license = "Apache-2.0"
 
 authors = ["IteraLabs"]
 keywords = ["ai", "llm", "nvidia", "gpu", "monitoring"]
