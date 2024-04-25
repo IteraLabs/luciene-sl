@@ -1,6 +1,6 @@
 [package]
 name = "lucien"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
 description = "A loggin agent to work with LLM in Lucid Mode"
 license = "Apache-2.0"

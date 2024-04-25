@@ -11,6 +11,8 @@ Cargo.lock
 build/
 dist/
 .eggs/
+python/lucien.egg-info
+*.so
 
 # executions
 .pyc
