@@ -1,3 +1,40 @@
+
+# -- Rust -- #
+
 /target
 Cargo.lock
+
+# -- python -- #
+
+# package builds
+*.whl
+build/
+dist/
+.eggs/
+
+# executions
+.pyc
+.pyo
+.__pycache__
+
+# -- Dev tools -- #
+
+# virtual environments
+*_venv
+.venv
+
+# editors
+.vscode
+.idea
+.envrc
+.python-version
+.pyrightconfig.json
+
+# notebooks
+.ipynb_checkpoints
+
+# others
 .DS_Store
+.cache
+
+
