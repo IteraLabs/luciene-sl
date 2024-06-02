@@ -1,11 +1,29 @@
 # ! /usr/bin/env python3
-
 import os
 import subprocess
 import torch
 import json
 
-def _system_profiler_gpu_arch_info():
+# ------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------ #
+
+def ioreg_gpu_arch_info():
+
+    cmd_ioreg = "ioreg -l"
+    sc_io = "IONameMatched"
+    sc_cc = "gpu-core-count"
+    sc_cv = "GPUConfigurationVariable"
+ 
+    cmd_ioreg_io = cmd_ioreg + " " + sc_io 
+    cmd_ioreg_cc = cmd_ioreg + " " + sc_cc
+    cmd_ioreg_cv = cmd_ioreg + " " + sc_cv
+
+    pass
+
+# ------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------ #
+
+def system_profiler_gpu_arch_info():
     """
     """ 
     
@@ -23,7 +41,6 @@ def _system_profiler_gpu_arch_info():
     }
     
     return _system_profiler_gpu_arch
-
 
 # ------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------ #

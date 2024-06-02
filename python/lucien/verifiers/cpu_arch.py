@@ -4,8 +4,10 @@ import subprocess
 import torch
 import json
 
-def _system_profiler_cpu_arch_info():
+def system_profiler_cpu_arch_info():
     """
+    Profiling CPU architecture.
+
     """
 
     sp_hdt = "SPHardwareDataType"
@@ -27,7 +29,7 @@ def _system_profiler_cpu_arch_info():
 # ------------------------------------------------------------------------------------ #
 # ------------------------------------------------------------------------------------ #
 
-def _sysctl_cpu_arch_info():
+def sysctl_cpu_arch_info():
     """
     """
 
