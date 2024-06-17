@@ -1,4 +1,4 @@
-import lucien
+from lucien import *
 
 def test_1():
     assert lucien.lucien_sum(5, 20) == "25"
