@@ -1,0 +1,10 @@
+[package]
+name = "tests"
+version = "0.0.1"
+description = "Lucien test"
+edition = "2021"
+
+[dependencies]
+anchor-client = { version = "0.31.1" }
+pyth-solana-receiver-sdk = { version = "0.6.1" }
+lucien = { version = "0.0.1", path = "../programs/lucien" }

@@ -1,3 +1,8 @@
+# -- svm dev -- #
+.anchor
+test-ledger/
+yarn.lock
+node_modules/
 
 # -- Rust -- #
 

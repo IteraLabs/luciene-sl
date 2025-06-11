@@ -1,0 +1,26 @@
+[package]
+name = "lucien"
+version = "0.0.1"
+description = "Lucid OnChain Agent"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "lucien"
+
+[features]
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+custom-heap = []
+custom-panic = []
+anchor-debug = []
+
+[dependencies]
+anchor-lang = { version = "0.31.1" }
+libm = "0.2.15"
+pyth-solana-receiver-sdk = { version = "0.6.1" }
+
