@@ -6,13 +6,16 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-lucien = "9QokYaXoDsLBUCnimMZ8nNpB48prsoUkNXtppzu62SAj"
+lucien = "Dig4zzQSRAg1bHzHwH4uGCLJAYNxVHqt66QWH1WyHSDH"
+
+[programs.devnet]
+lucien = "Dig4zzQSRAg1bHzHwH4uGCLJAYNxVHqt66QWH1WyHSDH"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

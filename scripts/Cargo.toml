@@ -1,0 +1,26 @@
+[package]
+
+name = "lucien-scripts"
+version = "0.0.1"
+description = "Scripts for Lucien Agent Deployment"
+
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+keywords.workspace = true
+categories.workspace = true
+documentation.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+anchor-client = { workspace = true }
+solana-sdk = { workspace = true }
+pyth-solana-receiver-sdk = { workspace = true }
+tokio = { workspace = true }
+
+anyhow = { version = "1.0" }
+shellexpand = { version = "3.1" }
+
+lucien = { version = "0.0.1", path = "../programs/lucien" }
+

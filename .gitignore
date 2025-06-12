@@ -1,8 +1,10 @@
 # -- svm dev -- #
 .anchor
+Anchor.toml
 test-ledger/
 yarn.lock
 node_modules/
+target/
 
 # -- Rust -- #
 

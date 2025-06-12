@@ -1,13 +1,46 @@
 [workspace]
 
+resolver = "2"
+
 members = [
+  
     # Solana Programs
-    "programs/*",
-    # Local testing
+    "programs/lucien",
+
+    # Deployment scripts
+    "scripts",
+
+    # Testing
     "tests"
 ]
 
-resolver = "2"
+[workspace.package]
+edition = "2021"
+rust-version = "1.84.1"
+
+authors = ["IteraLabs.ai <hello@iteralabs.ai>"]
+documentation = "https://docs.rs/lucien/"
+repository = "https://github.com/iteralabs/lucien"
+homepage = "https://iteralabs.ai/lucien"
+
+keywords = ["machine-learning", "framework", "agentic", "crypto", "trading"]
+categories = ["data-structures", "development-tools", "finance", "simulation"]
+exclude = ["assets/*", ".github", "Makefile.toml", "CONTRIBUTING.md", "*.log", "tags"]
+include = ["katex-header.html"]
+
+license = "Apache-2.0"
+
+[workspace.dependencies]
+anchor-client = { version = "0.31.1" }
+anchor-lang = { version = "0.31.1" }
+pyth-solana-receiver-sdk = { version = "0.6.1" }
+solana-sdk = { version = "2.2.0" }
+solana-program-test = { version = "1.18.26" } 
+tokio = { version = "1.45", features = ["full"] }
+libm = {version = "0.2.15" }
+
+[workspace.dev-dependencies]
+tokio-test = { version = "0.4" }
 
 [profile.release]
 overflow-checks = true

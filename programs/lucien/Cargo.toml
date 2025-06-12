@@ -1,7 +1,7 @@
 [package]
 name = "lucien"
 version = "0.0.1"
-description = "Lucid OnChain Agent"
+description = "Lucid Agent OnChain"
 edition = "2021"
 
 [lib]
@@ -20,7 +20,9 @@ custom-panic = []
 anchor-debug = []
 
 [dependencies]
-anchor-lang = { version = "0.31.1" }
-libm = "0.2.15"
-pyth-solana-receiver-sdk = { version = "0.6.1" }
+anchor-lang = { workspace = true }
+pyth-solana-receiver-sdk = { workspace = true }
+libm = { workspace = true }
+
+[dev.dependencies]
 

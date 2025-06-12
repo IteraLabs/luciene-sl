@@ -1,4 +1,4 @@
 # Lucien
 
-Transparent and Stateless Agent for OnChain Risk Models Deployment
+Transparent and Stateless Agent for OnChain Risk Modeling.
 
