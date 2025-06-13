@@ -1,13 +1,14 @@
 use anchor_lang::prelude::*;
 use crate::{
-    InitializeModel,
+    InitializeParams,
     InitializeResults,
     InitializeFeatures,
+    InitializeExperiments,
     InitializePriceHistory
 };
 
-pub fn initialize_model(
-    ctx: Context<InitializeModel>,
+pub fn initialize_params(
+    ctx: Context<InitializeParams>,
     weights: [f32; 5],
     bias: f32,
     ) -> Result<()> {
@@ -25,6 +26,7 @@ pub fn initialize_model(
     msg!("Model parameters initialized");
     
     Ok(())
+
 }
 
 pub fn initialize_results(ctx: Context<InitializeResults>) -> Result<()> {
@@ -61,7 +63,25 @@ pub fn initialize_features(ctx: Context<InitializeFeatures>) -> Result<()> {
 
 }
 
+pub fn initialize_experiments(ctx: Context<InitializeExperiments>) -> Result<()> {
+
+    let model_experiments = &mut ctx.accounts.model_experiments;
+    let bump = ctx.bumps.model_experiments;
+    
+    model_experiments.authority = ctx.accounts.authority.key();
+    model_experiments.last_update = Clock::get()?.unix_timestamp;
+    model_experiments.iterations = 0.0;
+    model_experiments.best_loss = 0.0;
+    model_experiments.bump = bump;
+    
+    msg!("Model Experiments account initialized");
+    
+    Ok(())
+
+}
+
 pub fn initialize_price_history(ctx: Context<InitializePriceHistory>) -> Result<()> {
+
     let price_history = &mut ctx.accounts.price_history;
     let bump = ctx.bumps.price_history;
     
@@ -76,5 +96,6 @@ pub fn initialize_price_history(ctx: Context<InitializePriceHistory>) -> Result<
     msg!("Price history account initialized with capacity for 10 price points");
     
     Ok(())
+
 }
 

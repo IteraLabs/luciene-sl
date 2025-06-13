@@ -6,10 +6,10 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-lucien = "Dig4zzQSRAg1bHzHwH4uGCLJAYNxVHqt66QWH1WyHSDH"
+lucien = "GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ"
 
 [programs.devnet]
-lucien = "Dig4zzQSRAg1bHzHwH4uGCLJAYNxVHqt66QWH1WyHSDH"
+lucien = "GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ"
 
 [registry]
 url = "https://api.apr.dev"

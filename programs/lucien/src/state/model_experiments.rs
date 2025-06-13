@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
-pub struct ModelExperiment {
+pub struct ModelExperiments {
 
     pub authority: Pubkey,
     pub last_update: i64,
@@ -12,7 +12,7 @@ pub struct ModelExperiment {
     pub bump: u8,
 }
 
-impl ModelExperiment {
+impl ModelExperiments {
 
     pub const LEN: usize = 8 +  // discriminator
         32 +                    // authority

@@ -1,6 +1,5 @@
 #![allow(unexpected_cfgs)]
 #![allow(deprecated)]
-#![allow(dead_code)]
 
 use anchor_lang::prelude::*;
 use pyth_solana_receiver_sdk::price_update::PriceUpdateV2;
@@ -10,11 +9,12 @@ use crate::state::{
     model_params::ModelParameters,
     model_results::ModelResults,
     model_features::ModelFeatures,
+    model_experiments::ModelExperiments,
     prices::PriceHistory
 };
 
 // Program ID
-declare_id!("Dig4zzQSRAg1bHzHwH4uGCLJAYNxVHqt66QWH1WyHSDH");
+declare_id!("GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ");
 
 /// To execute instructions
 pub use instructions::initialize;
@@ -40,19 +40,24 @@ pub mod lucien {
     use super::*;
 
     /// Initialize model parameters account
-    pub fn initialize_model(ctx: Context<InitializeModel>, weights: [f32; 5], bias: f32,
+    pub fn initialize_params(ctx: Context<InitializeParams>, weights: [f32; 5], bias: f32,
     ) -> Result<()> {
-        instructions::initialize::initialize_model(ctx, weights, bias)
+        instructions::initialize::initialize_params(ctx, weights, bias)
     }
-    
+     
     /// Initialize model results account
     pub fn initialize_results(ctx: Context<InitializeResults>) -> Result<()> {
         instructions::initialize::initialize_results(ctx)
     }
     
-    /// Initialize model results account
+    /// Initialize model features account
     pub fn initialize_features(ctx: Context<InitializeFeatures>) -> Result<()> {
         instructions::initialize::initialize_features(ctx)
+    }
+    
+    /// Initialize model experiments account
+    pub fn initialize_experiments(ctx: Context<InitializeExperiments>) -> Result<()> {
+        instructions::initialize::initialize_experiments(ctx)
     }
     
     /// Initialize price history account
@@ -77,9 +82,8 @@ pub mod lucien {
     
 }
 
-/// Context for model initialization
 #[derive(Accounts)]
-pub struct InitializeModel<'info> {
+pub struct InitializeParams<'info> {
 
     #[account(
         init,
@@ -103,7 +107,7 @@ pub struct InitializeResults<'info> {
         init,
         payer = authority,
         space = ModelResults::LEN,
-        seeds = [b"model_results", model_params.key().as_ref()],
+        seeds = [b"model_results", authority.key().as_ref()],
         bump
     )]
     pub model_results: Account<'info, ModelResults>,
@@ -117,7 +121,6 @@ pub struct InitializeResults<'info> {
 
 }
 
-/// Context for model initialization
 #[derive(Accounts)]
 pub struct InitializeFeatures<'info> {
 
@@ -135,6 +138,25 @@ pub struct InitializeFeatures<'info> {
     pub system_program: Program<'info, System>,
 
 }
+
+#[derive(Accounts)]
+pub struct InitializeExperiments<'info> {
+
+    #[account(
+        init,
+        payer = authority,
+        space = ModelExperiments::LEN,
+        seeds = [b"model_experiments", authority.key().as_ref()],
+        bump
+    )]
+    pub model_experiments: Account<'info, ModelExperiments>,
+    
+    #[account(mut)]
+    pub authority: Signer<'info>,
+    pub system_program: Program<'info, System>,
+
+}
+
 #[derive(Accounts)]
 pub struct InitializePriceHistory<'info> {
 
@@ -180,14 +202,14 @@ pub struct CalculateFeatures<'info> {
     
     #[account(
         mut,
-        seeds = [b"model_results", model_results.key().as_ref()],
+        seeds = [b"model_results", authority.key().as_ref()],
         bump
     )]
     pub model_results: Account<'info, ModelResults>,
     
     #[account(
         mut,
-        seeds = [b"model_features", model_features.key().as_ref()],
+        seeds = [b"model_features", authority.key().as_ref()],
         bump
     )]
     pub model_features: Account<'info, ModelFeatures>,
@@ -212,13 +234,13 @@ pub struct ModelInference<'info> {
     
     #[account(
         mut,
-        seeds = [b"model_results", model_params.key().as_ref()],
+        seeds = [b"model_results", authority.key().as_ref()],
         bump
     )]
     pub model_results: Account<'info, ModelResults>,
     
     #[account(
-        seeds = [b"model_features", model_params.key().as_ref()],
+        seeds = [b"model_features", authority.key().as_ref()],
         bump
     )]
     
