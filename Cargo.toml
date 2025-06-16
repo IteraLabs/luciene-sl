@@ -4,11 +4,11 @@ resolver = "2"
 
 members = [
     # Solana Programs
-    "programs/lucien",
+    "programs/luciene_sl",
 ]
 
 default-members = [
-  "programs/lucien"
+  "programs/luciene_sl"
 ]
 
 [workspace.package]
@@ -32,8 +32,6 @@ libm = {version = "0.2.15" }
 solana-sdk = { version = "2.2.0" }
 tokio = { version = "1.45" }
 solana-client = { version = "2.2.7" }
-
-#solana-program-test = { version = "1.18.26" } 
 
 [profile.release]
 overflow-checks = true

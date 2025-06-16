@@ -10,7 +10,7 @@ use crate::state::{
     model_results::ModelResults,
     model_features::ModelFeatures,
     model_experiments::ModelExperiments,
-    prices::PriceHistory
+    data_prices::DataPrices,
 };
 
 // Program ID
@@ -35,7 +35,7 @@ pub mod data;
 pub mod errors;
 
 #[program]
-pub mod lucien {
+pub mod luciene {
 
     use super::*;
 
@@ -61,8 +61,8 @@ pub mod lucien {
     }
     
     /// Initialize price history account
-    pub fn initialize_price_history(ctx: Context<InitializePriceHistory>) -> Result<()> {
-        instructions::initialize::initialize_price_history(ctx)
+    pub fn initialize_data_prices(ctx: Context<InitializeDataPrices>) -> Result<()> {
+        instructions::initialize::initialize_data_prices(ctx)
     }
 
     /// Fetch latest prices from Pyth oracle and update price history
@@ -112,7 +112,10 @@ pub struct InitializeResults<'info> {
     )]
     pub model_results: Account<'info, ModelResults>,
     
-    #[account(seeds = [b"model_params", authority.key().as_ref()], bump)]
+    #[account(
+        seeds = [b"model_params", authority.key().as_ref()],
+        bump
+    )]
     pub model_params: Account<'info, ModelParameters>,
     
     #[account(mut)]
@@ -158,16 +161,16 @@ pub struct InitializeExperiments<'info> {
 }
 
 #[derive(Accounts)]
-pub struct InitializePriceHistory<'info> {
+pub struct InitializeDataPrices<'info> {
 
     #[account(
         init,
         payer = authority,
-        space = PriceHistory::LEN,
-        seeds = [b"price_history", authority.key().as_ref()],
+        space = DataPrices::LEN,
+        seeds = [b"data_prices", authority.key().as_ref()],
         bump
     )]
-    pub price_history: Account<'info, PriceHistory>,
+    pub data_prices: Account<'info, DataPrices>,
     
     #[account(mut)]
     pub authority: Signer<'info>,
@@ -180,11 +183,11 @@ pub struct FetchPrice<'info> {
 
     #[account(
         mut,
-        seeds = [b"price_history", authority.key().as_ref()],
+        seeds = [b"data_prices", authority.key().as_ref()],
         bump
     )]
 
-    pub price_history: Account<'info, PriceHistory>,
+    pub data_prices: Account<'info, DataPrices>,
     pub price_update: Account<'info, PriceUpdateV2>,
     
     #[account(mut)]
@@ -194,18 +197,6 @@ pub struct FetchPrice<'info> {
 
 #[derive(Accounts)]
 pub struct CalculateFeatures<'info> {
-    #[account(
-        seeds = [b"model_params", authority.key().as_ref()],
-        bump
-    )]
-    pub model_params: Account<'info, ModelParameters>,
-    
-    #[account(
-        mut,
-        seeds = [b"model_results", authority.key().as_ref()],
-        bump
-    )]
-    pub model_results: Account<'info, ModelResults>,
     
     #[account(
         mut,
@@ -215,13 +206,14 @@ pub struct CalculateFeatures<'info> {
     pub model_features: Account<'info, ModelFeatures>,
 
     #[account(
-        seeds = [b"price_history", authority.key().as_ref()],
+        seeds = [b"data_prices", authority.key().as_ref()],
         bump
     )]
-    pub price_history: Account<'info, PriceHistory>,
+    pub data_prices: Account<'info, DataPrices>,
     
     #[account(mut)]
     pub authority: Signer<'info>,
+    pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]

@@ -11,5 +11,5 @@ pub mod model_experiments;
 pub mod model_features;
 
 /// PriceHistory
-pub mod prices;
+pub mod data_prices;
 

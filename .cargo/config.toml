@@ -1,5 +1,4 @@
 [env]
 PROGRAM_ID = "GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ"
 ANCHOR_WALLET = "~/.config/solana/id.json"
-NETWORK_URL = "https://api.devnet.solana.com"
-
+NETWORK_URL = "https://localhost::8099"

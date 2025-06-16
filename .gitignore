@@ -1,4 +1,6 @@
-# -- svm dev -- #
+
+# -- SVM -- #
+
 .anchor
 Anchor.toml
 test-ledger/
@@ -11,7 +13,7 @@ target/
 /target
 Cargo.lock
 
-# -- python -- #
+# -- Python -- #
 
 # package builds
 *.whl
@@ -20,6 +22,9 @@ dist/
 .eggs/
 python/lucien.egg-info
 *.so
+
+# notebooks
+.ipynb_checkpoints
 
 # executions
 .pyc
@@ -39,11 +44,6 @@ python/lucien.egg-info
 .python-version
 .pyrightconfig.json
 
-# notebooks
-.ipynb_checkpoints
-
 # others
 .DS_Store
 .cache
-
-

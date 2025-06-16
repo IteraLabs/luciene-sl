@@ -1,6 +1,6 @@
-# Lucien
+# luciene-sl
 
-Transparent and Stateless Agent for OnChain Risk Modeling.
+Transparent and Stateless Agent for OnChain Financial Models.
 
 ## Local testing
 
@@ -34,7 +34,7 @@ anchor deploy
 Generate a signer to be the default
 
 ```shell
-solana-keygen new -o target/deploy/lucien-keypair.json
+solana-keygen new -o target/deploy/luciene-keypair.json
 ```
 
 Airdrop solana tokens to have balance
@@ -96,12 +96,12 @@ anchor build
 Generate the program ID
 
 ```shell
-solana address -k target/deploy/lucien-keypair.json
+solana address -k target/deploy/luciene-keypair.json
 ```
 
 Now, update the program ID in the respective codes. 
 
-- `programs/lucien/src/lib.rs` in the `declare_id!("<PROGRAM_ID>")` line.
+- `programs/luciene-sl/src/lib.rs` in the `declare_id!("<PROGRAM_ID>")` line.
 - `Anchor.toml` in the `lucien = "\<PROGRAM_ID\>"
 
 Now, rebuild the program.
@@ -130,24 +130,11 @@ solana logs PROGRAM_ID
 
 ### Initialize, update and test program's functionality
 
-In order to conduct tests, as they are defined in `/test` run the following command with the `--skip-local-validator` flag in order to avoid the full cycle of build, deploy, test and shutdown. In favor for a more granular sequence. 
+In order to conduct tests, as they are defined in `/test` run the following command 
+with the `--skip-local-validator` flag in order to avoid the full cycle of build, deploy, 
+test and shutdown. In favor for a more granular sequence. 
 
 ```shell
 anchor test --skip-local-validator
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,0 +1,92 @@
+[package]
+name = "luciene_sl"
+description = "Lucid Agent OnChain"
+publish = true
+readme = "README.md"
+
+version = "0.0.1"
+rust-version = "1.84.1"
+edition = "2021"
+
+exclude = ["assets/*", ".github", "Makefile.toml", "*.log", "tags"]
+
+authors = ["IteraLabs.ai"]
+documentation = "https://docs.rs/luciene_sl/"
+repository = "https://github.com/iteralabs/luciene-sl"
+homepage = "https://iteralabs.ai/luciene-sl"
+keywords = ["solana", "smart contract", "distributed", "crypto", "agent"]
+categories = ["data-structures", "development-tools", "finance"]
+license = "Apache-2.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "luciene_sl"
+
+[dependencies]
+
+anchor-lang = { version = "0.31.1" }
+pyth-solana-receiver-sdk = { version = "0.6.1" }
+libm = {version = "0.2.15" }
+
+[dev-dependencies]
+anchor-lang = { version = "0.31.1" }
+anchor-client = { version = "0.31.1" }
+solana-sdk = { version = "2.2.0" }
+tokio = { version = "1.45" }
+solana-client = { version = "2.2.7" }
+toml = { version = "0.8" }
+solana-program-test = { version = "2.2.7" }
+
+luciene_sl = { path = "../luciene_sl" }
+
+[features]
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+custom-heap = []
+custom-panic = []
+anchor-debug = []
+
+[lints.rust]
+unsafe_code = "forbid"
+unused_extern_crates = "allow"
+unreachable_code = "deny"
+unreachable_patterns = "deny"
+unused_variables = "warn"
+trivial_casts = "warn"
+trivial_numeric_casts = "warn"
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)'] }
+
+# ---------------------------------------------------------------------------- Tests -- #
+# ---------------------------------------------------------------------------- ----- -- #
+
+[[test]]
+name = "connectivity"
+path = "tests/test_connectivity.rs"
+
+[[test]]
+name = "initialize_model_accounts"
+path = "tests/test_initialize_model_accounts.rs"
+
+[[test]]
+name = "initialize_data_accounts"
+path = "tests/test_initialize_data_accounts.rs"
+
+#[[test]]
+#name = "fetch_account"
+#path = "tests/test_fetch_model_params.rs"
+
+#[[test]]
+#name = "program_exists"
+#path = "tests/test_program_exist.rs"
+
+#[[test]]
+#name = "calculate_features"
+#path = "tests/test_calculate_features.rs"
+
+#[[test]]
+#name = "fetch_price"
+#path = "tests/test_fetch_price.rs"

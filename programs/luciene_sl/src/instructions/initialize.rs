@@ -4,7 +4,7 @@ use crate::{
     InitializeResults,
     InitializeFeatures,
     InitializeExperiments,
-    InitializePriceHistory
+    InitializeDataPrices
 };
 
 pub fn initialize_params(
@@ -54,7 +54,8 @@ pub fn initialize_features(ctx: Context<InitializeFeatures>) -> Result<()> {
     
     model_features.authority = ctx.accounts.authority.key();
     model_features.last_update = Clock::get()?.unix_timestamp;
-    model_features.price_periods = [0; 5];
+    model_features.price_periods = [1; 5];
+    model_features.computed_features = [0.1; 5];
     model_features.bump = bump;
     
     msg!("Model Features account initialized");
@@ -80,20 +81,20 @@ pub fn initialize_experiments(ctx: Context<InitializeExperiments>) -> Result<()>
 
 }
 
-pub fn initialize_price_history(ctx: Context<InitializePriceHistory>) -> Result<()> {
+pub fn initialize_data_prices(ctx: Context<InitializeDataPrices>) -> Result<()> {
 
-    let price_history = &mut ctx.accounts.price_history;
-    let bump = ctx.bumps.price_history;
+    let data_prices = &mut ctx.accounts.data_prices;
+    let bump = ctx.bumps.data_prices;
     
-    price_history.authority = ctx.accounts.authority.key();
-    price_history.last_updated = 0;
-    price_history.current_index = 0;
-    price_history.prices = [0.0; 10];
-    price_history.timestamps = [0; 10];
-    price_history.is_full = false;
-    price_history.bump = bump;
+    data_prices.authority = ctx.accounts.authority.key();
+    data_prices.last_updated = 0;
+    data_prices.current_index = 0;
+    data_prices.prices = [0.0; 10];
+    data_prices.timestamps = [0; 10];
+    data_prices.is_full = false;
+    data_prices.bump = bump;
     
-    msg!("Price history account initialized with capacity for 10 price points");
+    msg!("Data Prices account initialized with capacity for 10 price points");
     
     Ok(())
 

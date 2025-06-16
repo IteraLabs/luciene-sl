@@ -14,6 +14,7 @@ mod test_config {
     }
 
     impl AnchorConfig {
+
         pub fn new(
             cluster: Cluster,
             program_id: String,
@@ -21,6 +22,7 @@ mod test_config {
         ) -> Self {
             AnchorConfig { cluster, program_id, wallet }
         }
+
     }
 
     pub fn get_config() -> AnchorConfig {
@@ -43,7 +45,7 @@ mod tests {
     use anchor_client::solana_sdk::signature::Signer;
     use std::sync::Arc;
     use std::str::FromStr;
-    use crate::test_config::{AnchorConfig, get_config};
+    use crate::test_config::{ AnchorConfig, get_config };
     use anchor_lang::system_program;
     use anchor_client::
         solana_sdk::{
@@ -53,7 +55,7 @@ mod tests {
         };
 
     #[test]
-    fn test_initialize_accounts() -> Result<(), Box<dyn std::error::Error>> {
+    fn test_initialize_model_accounts() -> Result<(), Box<dyn std::error::Error>> {
 
         println!("🧪 Testing account initialization... ");
 
@@ -111,13 +113,13 @@ mod tests {
                 "InitializeResults" => {
                     program
                         .request()
-                        .accounts(lucien::accounts::InitializeResults {
+                        .accounts(luciene_sl::accounts::InitializeResults {
                             model_results: model_results_pda,
                             model_params: model_params_pda,
                             authority: payer_pubkey,
                             system_program: system_program::ID,
                         })
-                        .args(lucien::instruction::InitializeResults {})
+                        .args(luciene_sl::instruction::InitializeResults {})
                         .signer(&payer)
                         .send()
                 },
@@ -125,12 +127,12 @@ mod tests {
                 "InitializeFeatures" => {
                     program
                         .request()
-                        .accounts(lucien::accounts::InitializeFeatures {
+                        .accounts(luciene_sl::accounts::InitializeFeatures {
                             model_features: model_features_pda,
                             authority: payer_pubkey,
                             system_program: system_program::ID,
                         })
-                        .args(lucien::instruction::InitializeFeatures {})
+                        .args(luciene_sl::instruction::InitializeFeatures {})
                         .signer(&payer)
                         .send()
                 },
@@ -143,12 +145,12 @@ mod tests {
 
                     program
                         .request()
-                        .accounts(lucien::accounts::InitializeParams {
+                        .accounts(luciene_sl::accounts::InitializeParams {
                             model_params: model_params_pda,
                             authority: payer_pubkey,
                             system_program: system_program::ID,
                         })
-                        .args(lucien::instruction::InitializeParams { weights, bias })
+                        .args(luciene_sl::instruction::InitializeParams { weights, bias })
                         .signer(&payer)
                         .send()
                 },

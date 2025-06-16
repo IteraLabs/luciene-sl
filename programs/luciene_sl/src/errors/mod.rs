@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[error_code]
-pub enum LucienError {
+pub enum LucieneError {
     #[msg("Model parameters not initialized")]
     ModelNotInitialized,
     

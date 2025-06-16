@@ -53,10 +53,10 @@ mod tests {
         Client
     };
   
-    use lucien::state::model_params::ModelParameters;
+    use luciene_sl::state::model_params::ModelParameters;
 
     #[test]
-    fn test_account_fetching() {
+    fn test_fetch_model_params() {
 
         // Load helper struct
         let anchor_config: AnchorConfig = get_config();

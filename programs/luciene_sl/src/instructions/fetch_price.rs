@@ -1,11 +1,11 @@
 use anchor_lang::prelude::*;
-use crate::errors::LucienError;
+use crate::errors::LucieneError;
 use crate::FetchPrice;
 use crate::data::price_feed::PriceDataExtractor;
 
 pub fn fetch_and_store_price(ctx: Context<FetchPrice>) -> Result<()> {
 
-    let price_history = &mut ctx.accounts.price_history;
+    let data_prices = &mut ctx.accounts.data_prices;
     let price_update = &ctx.accounts.price_update; 
     
     // Extract SOL and USDC prices from Pyth oracle
@@ -13,16 +13,16 @@ pub fn fetch_and_store_price(ctx: Context<FetchPrice>) -> Result<()> {
     let usdc_usd = "0xeaa020c61cc479712813461ce153894a96a6c00b21ed0cfc2798d1f9a9e9c94a";
 
     let (sol_price, sol_timestamp) = PriceDataExtractor::get_oracle_price(price_update, sol_usd)
-        .map_err(|_| LucienError::PriceFeedNotFound)?;
+        .map_err(|_| LucieneError::PriceFeedNotFound)?;
         
     let (usdc_price, _usdc_timestamp) = PriceDataExtractor::get_oracle_price(price_update, usdc_usd)
-        .map_err(|_| LucienError::PriceFeedNotFound)?;
+        .map_err(|_| LucieneError::PriceFeedNotFound)?;
     
     // Calculate SOL/USDC midprice
     let midprice = PriceDataExtractor::calculate_pair_midprice(sol_price, usdc_price);
     
     // Store the midprice in price history
-    price_history.add_price(midprice, sol_timestamp);
+    data_prices.add_price(midprice, sol_timestamp);
     
     msg!("Price stored: SOL/USDC = {:.6}, SOL/USD = {:.2}, USDC/USD = {:.4}", 
          midprice, sol_price, usdc_price);

@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use crate::errors::LucienError;
+use crate::errors::LucieneError;
 use crate::models::linear;
 use crate::ModelInference;
 
@@ -11,7 +11,7 @@ pub fn run_inference(ctx: Context<ModelInference>) -> Result<()> {
     
     // Check if model is active
     if !model_params.is_active {
-        return Err(LucienError::ModelInactive.into());
+        return Err(LucieneError::ModelInactive.into());
     }
     
     // Get features from model results (should be calculated in previous step)

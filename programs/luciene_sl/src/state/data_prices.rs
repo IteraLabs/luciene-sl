@@ -1,8 +1,8 @@
 use anchor_lang::prelude::*;
 
-/// Historical price storage for moving average calculations
+/// Historical price data storage for moving average calculations
 #[account]
-pub struct PriceHistory {
+pub struct DataPrices {
     pub authority: Pubkey,
     pub last_updated: i64,
     pub current_index: u16,
@@ -12,7 +12,7 @@ pub struct PriceHistory {
     pub bump: u8,
 }
 
-impl PriceHistory {
+impl DataPrices {
 
     /// Size
     pub const LEN: usize = 8 +  // discriminator
