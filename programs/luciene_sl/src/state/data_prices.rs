@@ -8,7 +8,7 @@ pub struct DataPrices {
     pub current_index: u16,
     pub prices: [f32; 10],      // Store last 10 prices for longest MA
     pub timestamps: [i64; 10],  // last 10 timestamps
-    pub is_full: bool,          // True when we've filled all 50 slots
+    pub is_full: bool,          // True when we've filled all 10 slots
     pub bump: u8,
 }
 

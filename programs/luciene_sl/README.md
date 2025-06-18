@@ -18,8 +18,8 @@
 [badge-build]: https://github.com/iteralabs/luciene-sl/actions/workflows/rust.yml/badge.svg
 [url-build]: https://github.com/iteralabs/luciene-sl/actions
 
-[badge-docs]: https://docs.rs/luciene-sl/badge.svg
-[url-docs]: https://docs.rs/luciene-sl
+[badge-docs]: https://docs.rs/luciene_sl/badge.svg
+[url-docs]: https://docs.rs/crate/luciene_sl
 
 [badge-license]: https://img.shields.io/badge/license-apachev2-00baf5.svg
 [url-license]: https://github.com/iteralabs/luciene-sl/blob/develop/LICENSE

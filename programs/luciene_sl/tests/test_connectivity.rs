@@ -11,7 +11,7 @@ mod tests {
         use solana_client::rpc_client::RpcClient;
         println!(" Verifying devnet connectivity...");
         
-        let client = RpcClient::new(std::env::var("NETWORK_URL").unwrap());
+        let client = RpcClient::new(std::env::var("NETWORK").unwrap());
         
         // Test basic connectivity
         let version = client.get_version().unwrap();

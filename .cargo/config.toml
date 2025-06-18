@@ -1,4 +1,6 @@
 [env]
-PROGRAM_ID = "GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ"
-ANCHOR_WALLET = "~/.config/solana/id.json"
-NETWORK_URL = "https://localhost::8099"
+PROGRAM = "2ViX4tfo3HcFkwRBeDmBesq7kWrBJNAxpkNFsKpA9HLk"
+NETWORK = "http://127.0.0.1:8899"
+WALLET = "~/.config/solana/"
+PROGRAM_MAINNET = "GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ"
+NETWORK_MAINNET = "https://api.apr.dev"

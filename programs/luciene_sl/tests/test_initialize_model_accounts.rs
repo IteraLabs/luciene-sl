@@ -1,75 +1,46 @@
+
 #[cfg(test)]
 
 // -- ----------------------------------------------------------------- TESTS UTILS -- //
 // -- ----------------------------------------------------------------- ----------- -- //
 
-mod test_config {
-
-    use anchor_client::Cluster;
-
-    pub struct AnchorConfig {
-        pub cluster: Cluster,
-        pub program_id: String,
-        pub wallet: String,
-    }
-
-    impl AnchorConfig {
-
-        pub fn new(
-            cluster: Cluster,
-            program_id: String,
-            wallet: String,
-        ) -> Self {
-            AnchorConfig { cluster, program_id, wallet }
-        }
-
-    }
-
-    pub fn get_config() -> AnchorConfig {
-
-        let program_id = std::env::var("PROGRAM_ID").unwrap();
-        let wallet = std::env::var("ANCHOR_WALLET").unwrap();
-        let cluster = Cluster::Devnet;
-
-        AnchorConfig::new(cluster, program_id, wallet)
-
-    }
-}
-
-// -- ----------------------------------------------------------------- TESTS UTILS -- //
-// -- ----------------------------------------------------------------- ----------- -- //
+mod test_utils; 
 
 mod tests {
-    
-    use anchor_client::Client;
-    use anchor_client::solana_sdk::signature::Signer;
-    use std::sync::Arc;
-    use std::str::FromStr;
-    use crate::test_config::{ AnchorConfig, get_config };
+
+    use std::{sync::Arc, str::FromStr};
     use anchor_lang::system_program;
-    use anchor_client::
+    use anchor_client::{
+        Client, Cluster,
         solana_sdk::{
-            commitment_config::CommitmentConfig,
-            pubkey::Pubkey,
+            signature::Signer,
             signature::read_keypair_file,
+            pubkey::Pubkey,}
         };
 
     #[test]
     fn test_initialize_model_accounts() -> Result<(), Box<dyn std::error::Error>> {
 
-        println!("🧪 Testing account initialization... ");
+        println!("🧪 Testing Model Account Initialization... ");
 
-        let anchor_config: AnchorConfig = get_config();
-        let payer = Arc::new(read_keypair_file(anchor_config.wallet).unwrap());
-        let payer_pubkey = payer.pubkey();
-        
-        let client = Client::new_with_options(
-            anchor_config.cluster,
-            &payer,
-            CommitmentConfig::confirmed(),
+        use crate::test_utils::AnchorConfig;
+        let test_config = AnchorConfig::new(
+            Cluster::Localnet,
+            "PROGRAM".to_string(),
+            "WALLET".to_string(),
         );
         
-        let pubkey = Pubkey::from_str(&anchor_config.program_id).unwrap();
+        // Load helper struct
+        let anchor_config: AnchorConfig = test_config.get_config();
+        let keypair_file = read_keypair_file(&anchor_config.wallet).unwrap();
+
+        let payer = Arc::new(keypair_file);
+        let payer_pubkey = payer.pubkey();
+
+        println!("payer_pubkey: {:?}", payer_pubkey);
+
+        let client = Client::new(anchor_config.cluster, payer.clone());
+        let pubkey = Pubkey::from_str(&anchor_config.program).unwrap();
         let program = client.program(pubkey).unwrap();
         
         // Derive PDAs for all accounts

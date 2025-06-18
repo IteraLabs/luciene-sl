@@ -14,13 +14,13 @@ default-members = [
 [workspace.package]
 edition = "2021"
 rust-version = "1.84.1"
-authors = ["IteraLabs.ai <hello@iteralabs.ai>"]
+authors = ["iteralabs.xyz <support@iteralabs.xyz>"]
 license = "Apache-2.0"
 keywords = ["machine-learning", "framework", "agentic", "crypto", "trading"]
 categories = ["data-structures", "development-tools", "finance", "simulation"]
-documentation = "https://docs.rs/lucien/"
-repository = "https://github.com/iteralabs/lucien"
-homepage = "https://iteralabs.ai/lucien"
+documentation = "https://docs.rs/luciene_sl/"
+repository = "https://github.com/iteralabs/luciene-sl"
+homepage = "https://iteralabs.xyz/luciene_sl"
 exclude = ["assets/*", ".github", "Makefile.toml", "CONTRIBUTING.md", "*.log", "tags"]
 include = ["katex-header.html"]
 

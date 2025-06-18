@@ -10,12 +10,13 @@ edition = "2021"
 
 exclude = ["assets/*", ".github", "Makefile.toml", "*.log", "tags"]
 
-authors = ["IteraLabs.ai"]
+authors = ["iteralabs.xyz"]
 documentation = "https://docs.rs/luciene_sl/"
 repository = "https://github.com/iteralabs/luciene-sl"
-homepage = "https://iteralabs.ai/luciene-sl"
-keywords = ["solana", "smart contract", "distributed", "crypto", "agent"]
-categories = ["data-structures", "development-tools", "finance"]
+homepage = "https://iteralabs.xyz/luciene_sl"
+keywords = ["solana", "distributed", "agent", "crypto", "anchor"]
+categories = ["data-structures", "development-tools", "finance", 
+              "encoding", "template-engine"]
 license = "Apache-2.0"
 
 [lib]
@@ -23,10 +24,9 @@ crate-type = ["cdylib", "lib"]
 name = "luciene_sl"
 
 [dependencies]
-
 anchor-lang = { version = "0.31.1" }
 pyth-solana-receiver-sdk = { version = "0.6.1" }
-libm = {version = "0.2.15" }
+libm = { version = "0.2.15" }
 
 [dev-dependencies]
 anchor-lang = { version = "0.31.1" }
@@ -55,6 +55,7 @@ unsafe_code = "forbid"
 unused_extern_crates = "allow"
 unreachable_code = "deny"
 unreachable_patterns = "deny"
+dead_code = "allow"
 unused_variables = "warn"
 trivial_casts = "warn"
 trivial_numeric_casts = "warn"
@@ -68,6 +69,10 @@ name = "connectivity"
 path = "tests/test_connectivity.rs"
 
 [[test]]
+name = "program_exists"
+path = "tests/test_program_exist.rs"
+
+[[test]]
 name = "initialize_model_accounts"
 path = "tests/test_initialize_model_accounts.rs"
 
@@ -75,18 +80,15 @@ path = "tests/test_initialize_model_accounts.rs"
 name = "initialize_data_accounts"
 path = "tests/test_initialize_data_accounts.rs"
 
-#[[test]]
-#name = "fetch_account"
-#path = "tests/test_fetch_model_params.rs"
+[[test]]
+name = "fetch_model_params"
+path = "tests/test_fetch_model_params.rs"
 
-#[[test]]
-#name = "program_exists"
-#path = "tests/test_program_exist.rs"
+[[test]]
+name = "fetch_price"
+path = "tests/test_fetch_data_prices.rs"
 
-#[[test]]
-#name = "calculate_features"
-#path = "tests/test_calculate_features.rs"
+[[test]]
+name = "calculate_features"
+path = "tests/test_calculate_features.rs"
 
-#[[test]]
-#name = "fetch_price"
-#path = "tests/test_fetch_price.rs"

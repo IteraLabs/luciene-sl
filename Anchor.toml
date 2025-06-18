@@ -6,10 +6,10 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-luciene = "GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ"
+luciene = "2ViX4tfo3HcFkwRBeDmBesq7kWrBJNAxpkNFsKpA9HLk"
 
 [registry]
-url = "https://localnet::8099"
+url = "http://127.0.0.1::8899"
 
 [provider]
 cluster = "localnet"
@@ -17,8 +17,13 @@ wallet = "~/.config/solana/id.json"
 
 #[programs.devnet]
 #luciene = "GWVfXsjLBfbLvHpuwXPR6jYsCPSCcbMXaKBZvNLM1bgJ"
+
 #[registry]
 #url = "https://api.apr.dev"
+
+#[provider]
+#cluster = "devnet"
+#wallet = "~/.config/solana/id.json"
 
 #[scripts]
 #test = "cargo test"

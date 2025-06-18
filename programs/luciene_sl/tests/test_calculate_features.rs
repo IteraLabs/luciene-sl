@@ -4,62 +4,40 @@
 // -- ----------------------------------------------------------------- TESTS UTILS -- //
 // -- ----------------------------------------------------------------- ----------- -- //
 
-mod test_config {
-
-    use anchor_client::Cluster;
-
-    pub struct AnchorConfig {
-        pub cluster: Cluster,
-        pub program_id: String,
-        pub wallet: String,
-    }
-
-    impl AnchorConfig {
-        pub fn new(
-            cluster: Cluster,
-            program_id: String,
-            wallet: String,
-        ) -> Self {
-            AnchorConfig { cluster, program_id, wallet }
-        }
-    }
-
-    pub fn get_config() -> AnchorConfig {
-
-        let program_id = std::env::var("PROGRAM_ID").unwrap();
-        let wallet = std::env::var("ANCHOR_WALLET").unwrap();
-        let cluster = Cluster::Devnet;
-        
-        AnchorConfig::new(cluster, program_id, wallet)
-        
-        }
-}
-
-// -- ----------------------------------------------------------------- TESTS UTILS -- //
-// -- ----------------------------------------------------------------- ----------- -- //
+mod test_utils; 
 
 mod tests {
+
     use std::{sync::Arc, str::FromStr};
-    use crate::test_config::{AnchorConfig, get_config};
     use anchor_client::{
+        Client, Cluster,
         solana_sdk::{
+            signature::Signer,
             pubkey::Pubkey,
-            signature::read_keypair_file,
-            signer::Signer,
-        },
-        Client,
-    };
+            signature::read_keypair_file,}
+        };
+
     use luciene_sl::state::{model_features::ModelFeatures, data_prices::DataPrices};
 
     #[test]
-    fn test_feature_computation() {
+    fn test_calculate_features() {
+        
         // Load configuration from existing setup
-        let anchor_config: AnchorConfig = get_config();
+        use crate::test_utils::AnchorConfig;
+        let test_config = AnchorConfig::new(
+            Cluster::Localnet,
+            "PROGRAM".to_string(),
+            "WALLET".to_string(),
+        );
+
+        println!("🧪 Testing Calculate Features ... ");
+        
+        // Load helper struct
+        let anchor_config: AnchorConfig = test_config.get_config();
         let payer = Arc::new(read_keypair_file(anchor_config.wallet).unwrap());
         let payer_pubkey = payer.pubkey();
-
-        let client = Client::new(anchor_config.cluster,payer.clone());
-        let pubkey = Pubkey::from_str(&anchor_config.program_id).unwrap();
+        let client = Client::new(anchor_config.cluster, payer.clone());
+        let pubkey = Pubkey::from_str(&anchor_config.program).unwrap();
         let program = client.program(pubkey).unwrap();
 
         // Derive expected PDAs

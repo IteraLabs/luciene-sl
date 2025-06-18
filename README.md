@@ -10,6 +10,14 @@ This is done in 3 steps:
 2. Generate and fund a signer.
 3. Validate and localy use the program. 
 
+### In one terminal
+
+Start from empty project 
+
+```shel
+cargo clean && anchor clean
+```
+
 Configure Solana CLI to use `localhost`, which usually would be `http://localhost::8099`
 
 ```shell
@@ -21,6 +29,25 @@ Start a local validator for testing purposes.
 ```shell
 solana-test-validator
 ```
+
+And this will run undefinitely until stopped. 
+
+### In another terminal 
+
+Make sure there is enough balance, 
+
+```shell
+solana balance
+
+```
+
+If not enough balance, you can airdrop yourself solana tokens.
+
+```shell
+solana airdrop 10
+
+```
+
 build the anchor program
 
 ```shell
@@ -37,11 +64,6 @@ Generate a signer to be the default
 solana-keygen new -o target/deploy/luciene-keypair.json
 ```
 
-Airdrop solana tokens to have balance
-
-```shell
-solana airdrop 10
-```
 
 ## Devnet deployment
 
@@ -137,4 +159,4 @@ test and shutdown. In favor for a more granular sequence.
 ```shell
 anchor test --skip-local-validator
 ```
-
+https://explorer.solana.com/
